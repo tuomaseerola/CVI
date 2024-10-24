@@ -1,0 +1,53 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# CVI
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of CVI is to ...
+
+## Installation
+
+You can install the development version of CVI like so:
+
+```{r}
+if (!require(devtools)) install.packages("devtools")
+devtools::install_github("tuomaseerola/CVI")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r items,results='asis'}
+library(CVI)
+data(FM)
+FM<-CVI_check(FM)
+Items <- CVI_item(FM)
+print(knitr::kable(Items))
+```
+You can also visualise the content validity of items.
+
+```{r visualise}
+CVI_visualise(Items) # default CVI.I.adj and Kappa
+```
+
+The CV for the scale can be obtained by:
+```{r scale}
+CVI_scale(Items)
+```
+
