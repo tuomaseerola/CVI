@@ -1,3 +1,3 @@
 # CVI (development version)
 
-* Initial CRAN submission.
+* Initial Github submission.

@@ -1,6 +1,15 @@
+#' Check assumptions if the data is in correct format
+#'
+#' CVI package assumes that the data is in tidy format
+#'
+#' @param data data frame to be processed, where the minimal requirements are:
+#' ID, name, value
+#' @param response_options relate to ratings of the items
+#' where the default is 'Extremely Relevant','Moderately Relevant','Slightly Relevant','Not Relevant'
+#' @return data frame with the same structure as the input
+
 CVI_check <- function(data=NULL,response_options='default') {
-# Check assumptions if the data is in correct format
-# CVI package assumes that the data is in tidy format
+
   # Assumes three columns
   stopifnot(dim(data)[2] == 3)
 

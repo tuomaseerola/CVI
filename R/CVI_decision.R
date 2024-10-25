@@ -1,3 +1,10 @@
+#' Return decision based on CVI
+#'
+#' Derived from Abdollahpour et al. (2010)
+#'
+#' @param CVI value to be processed
+#' @return data frame with the same structure as the input
+
 CVI_decision <- function(CVI=NULL) {
   # calculates CVI decision based on
   # CVI = observed CVI

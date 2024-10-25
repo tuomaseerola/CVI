@@ -18,36 +18,66 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of CVI is to ...
+This package pools together various content validity indices (CVI) of items and scales. The package is designed to be used in the context of psychological research, but it can be used in other fields as well. The CVI indices are based on the work of Polit and Beck (2006) and Lynn (1986). The package provides functions to calculate the following CVI indices:
+
+* CVI-I (item-level content validity index)
+* CVI-I.adj (item-level content validity index adjusted for chance agreement)
+* CVI-R (item-level content validity ratio)
+* S-CVI/Ave (scale-level content validity index based on the average method)
+* S-CVI/UA (scale-level content validity index based on the universal agreement method)
 
 ## Installation
 
-You can install the development version of CVI like so:
+You can install the development version of CVI from GitHub:
 
-```{r}
+```{r,eval=FALSE}
 if (!require(devtools)) install.packages("devtools")
 devtools::install_github("tuomaseerola/CVI")
 ```
 
+```{r silent,echo=FALSE}
+devtools::load_all()
+library(CVI)
+packageVersion('CVI')
+```
+
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This shows you how to calculate the content validity of items. There is a build-in data called FM (Focus-Motivation construct related to music-relatex emotional experiences) that contains expert ratings (`ID`) of items (`name`) that they have rated on relevancy scale of 1-4 (`value`). We first load and preview this data.
 
 ```{r items,results='asis'}
 library(CVI)
 data(FM)
-FM<-CVI_check(FM)
-Items <- CVI_item(FM)
-print(knitr::kable(Items))
+print(knitr::kable(head(FM),digits=2))
 ```
-You can also visualise the content validity of items.
 
-```{r visualise}
+We can check and summarise the content with `CVI_check` function.
+
+```{r}
+FM <- CVI_check(FM)
+```
+
+We then calculate the content validity of the items. The summary gives _Sum_ (how many experts agree and have rated the item as Exteremely or Moderately Relevant) and _N_ (how many expert have rated this item), and _CVI-I_ and _CVI-I.adj_ (kappa-adjusted) values for each item and as well _CVI-R_ (ratio). The output also includes two summary descriptions of what to do with the items based on the CVI-I.adj values (`Decision` and `KappaFit`).
+
+```{r cvi, results='asis'}
+Items <- CVI_item(FM)
+print(knitr::kable(head(Items),digits=2))
+```
+
+We can also visualise the content validity of items using the function `CVI_visualise`. The default options show CVI-I.adjusted values for each item and the suggestion based on Kappa value for each item. You can specify other indices as well.
+
+```{r visualise,fig.width=8,fig.height=4}
 CVI_visualise(Items) # default CVI.I.adj and Kappa
 ```
 
-The CV for the scale can be obtained by:
+The content validity for the scale can be obtained from the calculated items by `CVI_scale` function. The default returns the S-CIV/Ave (scale-level content validity index based on the average method) but you and specify other indices as well.
+
 ```{r scale}
-CVI_scale(Items)
+print(CVI_scale(Items))
 ```
 
+## References
+
+* Lynn, M. R. (1986). Determination and quantification of content validity. _Nursing Research, 35(6)_, 382--385.
+* Polit, D. F. & Beck, C. T. (2006). The content validity index: are you sure you know what's being reported? Critique and recommendations. _Research in Nursing \& Health, 29(5)_, 489--497. 

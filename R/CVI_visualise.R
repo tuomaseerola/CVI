@@ -1,3 +1,12 @@
+#' Creates a plot of the CVI per items
+#'
+#' Assumes item CVIs have been calculated previously
+#'
+#' @param data items as data frame
+#' @param yvar which variable to plot on the Y-axis
+#' @param colorvar which variable to plot as the colour
+#' @return data frame with the same structure as the input
+
 CVI_visualise <- function(data,yvar='CVI.I.adj',colorvar='KappaFit') {
 # visualise items
   data2 <- dplyr::select(data,all_of(c('Item',yvar,colorvar)))
@@ -14,6 +23,6 @@ CVI_visualise <- function(data,yvar='CVI.I.adj',colorvar='KappaFit') {
     ggplot2::ylab(yvar)+
     ggplot2::scale_color_brewer(palette = "Spectral",direction=-1,name=colorvar)+
     ggplot2::theme_bw()
-    print(g1)  
+    print(g1)
     return <- g1
 }

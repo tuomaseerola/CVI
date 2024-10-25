@@ -1,6 +1,6 @@
 Package: CVI
 Title: Calculates Content Validity Indices
-Version: 0.0.0.9000
+Version: 0.1.0.0000
 Authors@R: 
     person("Tuomas", "Eerola", , "tuomas.eerola@durham.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2896-929X"))
@@ -10,7 +10,6 @@ License: MIT + file LICENSE
 Imports: 
     dplyr,
     ggplot2,
-    psychometric,
     tidyr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
