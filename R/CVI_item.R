@@ -1,17 +1,20 @@
 #' Run content validity indices for items
 #'
 #' Assumes that the ratings are on a specific scale of 1-4
-#' Calculates CVI for items
+#' Calculates CVI and CVR indices for items and also gives some decision rules
 #'
 #' @param data data frame to be processed, where the minimal requirements are:
 #' ID, name, value
+#' @param CVR_method method for choosing the decision value for CVR.
+#' Default is 'Exact' but 'Bayes', 'Chi' and 'Latche' are also possible. 
 #' @return data frame with the same structure as the input
+#' @importFrom dplyr %>%
+#' @importFrom dplyr rowwise
 
-CVI_item <- function(data=NULL) {
-  # describe what the analysis does
-  # Expert give ratings on a scale of 1-4
-  # Content Validity (CV), CVR (ratio)
-
+CVI_item <- function(data = NULL, CVR_method = "Exact") {
+  if (is.null(data)) {
+    stop("No data provided")
+  }
   # Content validity ratio (CVR) from https://www.sciencedirect.com/science/article/pii/S2405603023000109
   # CVR=(Ne - N/2)/(N/2)
   # https://rdrr.io/cran/psychometric/man/CVratio.html
@@ -39,7 +42,6 @@ CVI_item <- function(data=NULL) {
     item <- item[complete.cases(item),] # remove NAs from the data (experts and ratings)
     N_experts <- nrow(item)
     N_high <- sum(item[1]=='Extremely Relevant' | item[1]=='Moderately Relevant')
-  #  CVR <- rbind(CVR,psychometric::CVratio(N_experts,N_high))
     CVR <- rbind(CVR,cvr(N_experts,N_high))
 
     #  Content validity index (CVI)
@@ -54,8 +56,9 @@ CVI_item <- function(data=NULL) {
   # add kappa adjusted
   CV %>% dplyr::rowwise() %>% dplyr::mutate(CVI.I.adj = kappa_chance_adjusted(N, Sum,CVI.I)) -> CV
   # add decision
-  CV %>% dplyr::rowwise() %>% dplyr::mutate(Decision = CVI_decision(CVI.I)) -> CV
+  CV %>% dplyr::rowwise() %>% dplyr::mutate(CVIFit = CVI_decision(CVI.I)) -> CV
   CV %>% dplyr::rowwise() %>% dplyr::mutate(KappaFit = kappa_decision(CVI.I.adj)) -> CV
-
+  CV %>% dplyr::rowwise() %>% dplyr::mutate(CVRFit = CVR_decision(CVI.R,N_experts = N, Method = CVR_method)) -> CV
+  
     return <- CV
 }

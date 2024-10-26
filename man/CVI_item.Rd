@@ -4,16 +4,19 @@
 \alias{CVI_item}
 \title{Run content validity indices for items}
 \usage{
-CVI_item(data = NULL)
+CVI_item(data = NULL, CVR_method = "Exact")
 }
 \arguments{
 \item{data}{data frame to be processed, where the minimal requirements are:
 ID, name, value}
+
+\item{CVR_method}{method for choosing the decision value for CVR.
+Default is 'Exact' but 'Bayes', 'Chi' and 'Latche' are also possible.}
 }
 \value{
 data frame with the same structure as the input
 }
 \description{
 Assumes that the ratings are on a specific scale of 1-4
-Calculates CVI for items
+Calculates CVI and CVR indices for items and also gives some decision rules
 }

@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "80%"
 )
 ```
 
@@ -71,13 +71,22 @@ We can also visualise the content validity of items using the function `CVI_visu
 CVI_visualise(Items) # default CVI.I.adj and Kappa
 ```
 
-The content validity for the scale can be obtained from the calculated items by `CVI_scale` function. The default returns the S-CIV/Ave (scale-level content validity index based on the average method) but you and specify other indices as well.
+The content validity for the scale can be obtained from the calculated items by `CVI_scale` function. The default returns the S-CVI/Ave (scale-level content validity index based on the average method) but you can specify other indices as well.
 
 ```{r scale}
 print(CVI_scale(Items))
 ```
+This _S-CVI/Ave_ value of `r CVI_scale(Items)` suggest poor overall scale relevance as the recommended value should be over 0.80 (Polit \& Beck, 2006). If we take all items that actually have a good CVI-I fit (CVIFit is `Appropriate`), we can recalculate the revised _S-CVI/Ave_ value of the scale that has `r nrow(Items[Items$CVIFit=='Appropriate',])` items.
+
+```{r scaletrimmed}
+ItemsRelevant <- Items[Items$CVIFit=='Appropriate',]
+print(CVI_scale(ItemsRelevant))
+```
+
+An excellent _S-CVI/Ave_ value for the scale is achieved in this case.
 
 ## References
 
 * Lynn, M. R. (1986). Determination and quantification of content validity. _Nursing Research, 35(6)_, 382--385.
 * Polit, D. F. & Beck, C. T. (2006). The content validity index: are you sure you know what's being reported? Critique and recommendations. _Research in Nursing \& Health, 29(5)_, 489--497. 
+* Romero Jeldres, M., Díaz Costa, E., & Faouzi Nadim, T. (2023). A review of Lawshe’s method for calculating content validity in the social sciences. _Frontiers in Education, 8_. https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2023.1271335

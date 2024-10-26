@@ -1,10 +1,12 @@
 #' FM
 #'
-#' Rating data example from Connor et al., (in prep)
-#' This data relates to the Focus-Motivation construct related to
-#' music-related emotional experiences.
+#' Rating data from Connor et al., (in prep) containing 15 experts' ratings
+#' of relevance for Focus-Motivation construct as measured with 17 items
+#' that relate to emotional episodes involved in music. The ratings were done 
+#' on a 4-point scale (1 = Not Relevant, 2 = Slightly Relevant, 3 = Moderately Relevant,
+#' 4 = Extremely Relevant).
 #'
-#' @format A data tibble with 300 rows and 3 variables:
+#' @format A data tibble with 255 rows and 3 variables:
 #' \describe{
 #'   \item{ID}{Expert ID}
 #'   \item{name}{Item name}

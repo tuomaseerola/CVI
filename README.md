@@ -33,7 +33,7 @@ devtools::install_github("tuomaseerola/CVI")
 ```
 
     #> ℹ Loading CVI
-    #> [1] '0.1.0.0'
+    #> [1] '0.1.3.0'
 
 ## Example
 
@@ -63,11 +63,11 @@ We can check and summarise the content with `CVI_check` function.
 ``` r
 FM <- CVI_check(FM)
 #> [1] "No. Experts: 15"
-#> [1] "No. Items: 31"
+#> [1] "No. Items: 17"
 #> [1] "No. Item response options: 4"
 #> [1] "Item response options: Extremely Relevant--Moderately Relevant--Slightly Relevant--Not Relevant"
-#> [1] "Missing responses: 97"
-#> [1] "Total responses: 465"
+#> [1] "Missing responses: 53"
+#> [1] "Total responses: 255"
 ```
 
 We then calculate the content validity of the items. The summary gives
@@ -83,14 +83,14 @@ Items <- CVI_item(FM)
 print(knitr::kable(head(Items),digits=2))
 ```
 
-| Item | Sum |   N | CVI.I | CVI.R | CVI.I.adj | Decision    | KappaFit  |
-|:-----|----:|----:|------:|------:|----------:|:------------|:----------|
-| EM2  |  11 |  12 |  0.92 |  0.83 |      0.92 | Appropriate | Excellent |
-| EM3  |  11 |  12 |  0.92 |  0.83 |      0.92 | Appropriate | Excellent |
-| EM5  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      |
-| EM6  |   7 |  12 |  0.58 |  0.17 |      0.48 | Eliminated  | Fair      |
-| EM7  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      |
-| EM9  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      |
+| Item | Sum |   N | CVI.I | CVI.R | CVI.I.adj | CVIFit      | KappaFit  | CVRFit         |
+|:-----|----:|----:|------:|------:|----------:|:------------|:----------|:---------------|
+| EM2  |  11 |  12 |  0.92 |  0.83 |      0.92 | Appropriate | Excellent | Accept \> 0.67 |
+| EM3  |  11 |  12 |  0.92 |  0.83 |      0.92 | Appropriate | Excellent | Accept \> 0.67 |
+| EM5  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      | Reject         |
+| EM6  |   7 |  12 |  0.58 |  0.17 |      0.48 | Eliminated  | Fair      | Reject         |
+| EM7  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      | Reject         |
+| EM9  |   8 |  12 |  0.67 |  0.33 |      0.62 | Eliminated  | Good      | Reject         |
 
 We can also visualise the content validity of items using the function
 `CVI_visualise`. The default options show CVI-I.adjusted values for each
@@ -101,17 +101,31 @@ specify other indices as well.
 CVI_visualise(Items) # default CVI.I.adj and Kappa
 ```
 
-<img src="man/figures/README-visualise-1.png" width="100%" />
+<img src="man/figures/README-visualise-1.png" width="80%" />
 
 The content validity for the scale can be obtained from the calculated
-items by `CVI_scale` function. The default returns the S-CIV/Ave
+items by `CVI_scale` function. The default returns the S-CVI/Ave
 (scale-level content validity index based on the average method) but you
-and specify other indices as well.
+can specify other indices as well.
 
 ``` r
 print(CVI_scale(Items))
-#> [1] 0.7140762
+#> [1] 0.6720143
 ```
+
+This *S-CVI/Ave* value of suggest poor overall scale relevance as the
+recommended value should be over 0.80 (Polit & Beck, 2006). If we take
+all items that actually have a good CVI-I fit (CVIFit is `Appropriate`),
+we can recalculate the revised *S-CVI/Ave* value of the scale that has 5
+items.
+
+``` r
+ItemsRelevant <- Items[Items$CVIFit=='Appropriate',]
+print(CVI_scale(ItemsRelevant))
+#> [1] 0.9166667
+```
+
+An excellent *S-CVI/Ave* value for the scale is achieved in this case.
 
 ## References
 
@@ -120,3 +134,7 @@ print(CVI_scale(Items))
 - Polit, D. F. & Beck, C. T. (2006). The content validity index: are you
   sure you know what’s being reported? Critique and recommendations.
   *Research in Nursing & Health, 29(5)*, 489–497.
+- Romero Jeldres, M., Díaz Costa, E., & Faouzi Nadim, T. (2023). A
+  review of Lawshe’s method for calculating content validity in the
+  social sciences. *Frontiers in Education, 8*.
+  <https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2023.1271335>
