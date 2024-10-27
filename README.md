@@ -33,7 +33,7 @@ devtools::install_github("tuomaseerola/CVI")
 ```
 
     #> ℹ Loading CVI
-    #> [1] '0.1.3.0'
+    #> [1] '0.1.4.0'
 
 ## Example
 
