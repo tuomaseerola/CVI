@@ -3,8 +3,14 @@
 
 # CVI
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 <!-- badges: start -->
 
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 This package pools together various content validity indices (CVI) of
@@ -14,14 +20,20 @@ CVI indices are based on the work of Polit and Beck (2006) and Lynn
 (1986). The package provides functions to calculate the following CVI
 indices:
 
-- CVI-I (item-level content validity index)
-- CVI-I.adj (item-level content validity index adjusted for chance
+- *CVI-I* (item-level content validity index)
+- *CVI-I.adj* (item-level content validity index adjusted for chance
   agreement)
-- CVI-R (item-level content validity ratio)
-- S-CVI/Ave (scale-level content validity index based on the average
+- *CVI-R* (item-level content validity ratio)
+- *S-CVI/Ave* (scale-level content validity index based on the average
   method)
-- S-CVI/UA (scale-level content validity index based on the universal
+- *S-CVI/UA* (scale-level content validity index based on the universal
   agreement method)
+
+The package also offers various thresholds for the CVI indices based on
+the critical values suggested by Romero Jeldres, Díaz Costa, and Faouzi
+Nadim (2023). The package also provides functions to calculate the
+chance-adjusted kappa values for the CVI-I indices and to make decisions
+based on the kappa values.
 
 ## Installation
 
