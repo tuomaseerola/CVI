@@ -45,7 +45,7 @@ devtools::install_github("tuomaseerola/CVI")
 ```
 
     #> ℹ Loading CVI
-    #> [1] '0.1.4.0'
+    #> [1] '0.1.4.1000'
 
 ## Example
 
@@ -110,7 +110,7 @@ item and the suggestion based on Kappa value for each item. You can
 specify other indices as well.
 
 ``` r
-CVI_visualise(Items) # default CVI.I.adj and Kappa
+print(CVI_visualise(Items,showlegend = TRUE)) # default CVI.I.adj and Kappa
 ```
 
 <img src="man/figures/README-visualise-1.png" width="80%" />

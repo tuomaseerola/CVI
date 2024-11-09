@@ -60,5 +60,9 @@ CVI_item <- function(data = NULL, CVR_method = "Exact") {
   CV %>% dplyr::rowwise() %>% dplyr::mutate(KappaFit = kappa_decision(CVI.I.adj)) -> CV
   CV %>% dplyr::rowwise() %>% dplyr::mutate(CVRFit = CVR_decision(CVI.R,N_experts = N, Method = CVR_method)) -> CV
   
+  CV$CVIFit <- factor(CV$CVIFit,levels=c("Appropriate","Needs revision","Eliminated"))
+  CV$KappaFit <- factor(CV$KappaFit,levels=c("Excellent","Good","Fair","Poor"))
+  CV$CVRFit <- factor(CV$CVRFit)
+
     return <- CV
 }

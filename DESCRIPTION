@@ -1,6 +1,6 @@
 Package: CVI
 Title: Calculates Content Validity Indices
-Version: 0.1.4.0000
+Version: 0.1.4.1000
 Authors@R: 
     person("Tuomas", "Eerola", , "tuomas.eerola@durham.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2896-929X"))

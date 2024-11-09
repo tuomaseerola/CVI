@@ -74,7 +74,7 @@ print(knitr::kable(head(Items),digits=2))
 We can also visualise the content validity of items using the function `CVI_visualise`. The default options show CVI-I.adjusted values for each item and the suggestion based on Kappa value for each item. You can specify other indices as well.
 
 ```{r visualise,fig.width=8,fig.height=4}
-CVI_visualise(Items) # default CVI.I.adj and Kappa
+print(CVI_visualise(Items,showlegend = TRUE)) # default CVI.I.adj and Kappa
 ```
 
 The content validity for the scale can be obtained from the calculated items by `CVI_scale` function. The default returns the S-CVI/Ave (scale-level content validity index based on the average method) but you can specify other indices as well.

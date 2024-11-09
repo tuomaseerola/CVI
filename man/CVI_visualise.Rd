@@ -4,7 +4,12 @@
 \alias{CVI_visualise}
 \title{Creates a plot of the CVI per items}
 \usage{
-CVI_visualise(data, yvar = "CVI.I.adj", colorvar = "KappaFit")
+CVI_visualise(
+  data,
+  yvar = "CVI.I.adj",
+  colorvar = "KappaFit",
+  showlegend = FALSE
+)
 }
 \arguments{
 \item{data}{items as data frame}
@@ -12,6 +17,8 @@ CVI_visualise(data, yvar = "CVI.I.adj", colorvar = "KappaFit")
 \item{yvar}{which variable to plot on the Y-axis}
 
 \item{colorvar}{which variable to plot as the colour}
+
+\item{showlegend}{option to show legend (false is the default)}
 }
 \value{
 data frame with the same structure as the input
